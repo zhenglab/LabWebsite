@@ -1,0 +1,40 @@
+<extend name="Public/base" /> 
+<block name="body">
+	<h2>修改用户</h2>
+		<br></br>
+		
+	   	<volist name="user_list" id="vo">
+		<form action="__URL__/do_edit_user/id/{$vo['id']}"  method="post">
+	   		<p class="subtit">用户名</p>
+			<div>
+				<input type="text" id="txtTitle" name="username" style="width:560px; height:20px; float:left;" maxlength="100" value="{$vo['username']}"/>
+			</div>
+			<br></br>
+			<br></br>
+			<p class="subtit">请输入密码</p>
+			<div>
+				<input type="password" id="txtTitle" name="password" style="width:560px; height:20px; float:left;" maxlength="100"/>
+			</div>
+			<br></br>
+			<br></br>
+			<p class="subtit">请再一次密码</p>
+			<div>
+				<input type="password" id="txtTitle" name="repassword" style="width:560px; height:20px; float:left;" maxlength="100"/>
+			</div>
+			<br></br>
+			<br></br>
+			<p class="subtit">用户状态</p>
+			<div>
+				<select name="status" id="selType">
+					<option value="1">启用</option>
+					<option value="0">禁用</option>
+				</select>
+			</div>
+			<br></br>
+			<br></br>
+			<input type="submit" value="{$btn_ok_text}"/>
+		</form>
+		</volist>
+	    <div class="clear"></div>
+
+</block>

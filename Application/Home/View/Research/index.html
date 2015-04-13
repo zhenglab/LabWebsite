@@ -1,0 +1,83 @@
+<extend name="Base/common"/>
+<block name="body">
+
+
+<!-- bloc-8 -->
+<div class="bloc l-bloc " id="bloc-8">
+	<div class="container bloc-lg">
+		<div class="row">
+			<div class="col-sm-12">
+				<span class="fa fa-star icon-md pull-left"></span>
+				<p class=" mg-clear">
+					2015
+				</p>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- bloc-8 END -->
+
+<!-- bloc-9 -->
+<div class="bloc l-bloc " id="bloc-9">
+	<foreach name="p2015_list" item="vo" >
+	<div class="container bloc-lg">
+		<div class="row">
+			<div class="col-sm-4">
+				<img src="__PUBLIC__/Uploads/{$vo.img_path}" class="img-responsive" alt='' />
+			</div>
+			<div class="col-sm-8">
+				<h3 class="mg-md">
+					{$vo.title}
+				</h3>
+				<p>
+					{$vo.describe}
+					<br/>
+					{$vo.classify}&nbsp;&nbsp;&nbsp;{$vo.date}&nbsp;&nbsp;&nbsp;<a href="__PUBLIC__/Uploads/{$vo.file_path}" target="_blank">[PDF]</a>
+				</p>
+			</div>
+		</div>
+	</div>
+	</foreach>
+</div>
+<!-- bloc-9 END -->
+
+<!-- bloc-10 -->
+<div class="bloc l-bloc " id="bloc-10">
+	<div class="container bloc-lg">
+		<div class="row">
+			<div class="col-sm-12">
+				<span class="fa fa-star icon-md pull-left"></span>
+				<h3 class="mg-clear ">
+					2014
+				</h3>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- bloc-10 END -->
+
+<!-- bloc-11 -->
+<div class="bloc l-bloc " id="bloc-11">
+	<foreach name="p2014_list" item="vo" >
+	<div class="container bloc-lg">
+		<div class="row">
+			<div class="col-sm-4">
+				<img src="__PUBLIC__/Uploads/{$vo.img_path}" class="img-responsive" alt='' />
+			</div>
+			<div class="col-sm-8">
+				<h3 class="mg-md">
+					{$vo.title}
+				</h3>
+				<p>
+					{$vo.describe}
+					<br/>
+					{$vo.classify}&nbsp;&nbsp;&nbsp;{$vo.date}&nbsp;&nbsp;&nbsp;<a href="__PUBLIC__/Uploads/{$vo.file_path}" target="_blank">[PDF]</a>
+				</p>
+			</div>
+		</div>
+	</div>
+	</foreach>
+</div>
+<!-- bloc-11 END -->
+
+</block>

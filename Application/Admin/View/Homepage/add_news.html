@@ -1,0 +1,36 @@
+<extend name="Public/base" /> 
+<block name="body">
+	<h2>添加简介</h2>
+		<br></br> 
+		
+	   	<!-- 实例化百度编辑器 -->
+
+	   	<form action="__URL__/do_add_news"  method="post">
+	   		<p class="subtit">新闻标题</p>
+			<div>
+				<input type="text" id="txtTitle" name="title" style="width:560px; height:20px; float:left;" maxlength="100" value="标题不能为空" onfocus="if(value=='标题不能为空') {value=''}" onblur="if (value=='') {value='标题不能为空'}"/>
+			</div>
+			<br></br>
+			<br></br>
+			<p class="subtit">新闻状态</p>
+			<div>
+				<select name="status" id="selType">
+					<option value="1">显示</option>
+					<option value="0">隐藏</option>
+				</select>
+			</div>
+			<br></br>
+			<p class="subtit">新闻内容</p>
+		    <div id="myEditor">
+		    	<script id="container" name="content" type="text/plain">
+    			</script>
+    			<script type="text/javascript">
+        			var ue = UE.getEditor('container');
+    			</script>
+			</div>
+			<br></br>
+			<input type="submit" value="{$btn_ok_text}"/>
+		</form>
+	    <div class="clear"></div>
+
+</block>

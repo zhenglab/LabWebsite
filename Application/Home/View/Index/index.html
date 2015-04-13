@@ -1,0 +1,97 @@
+<extend name="Base/common"/>
+<block name="body">
+<!-- bloc-1 -->
+<div class="bloc l-bloc " id="bloc-1">
+	<div class="container bloc-lg">
+		<div class="row">
+			<div class="col-sm-6">
+				<h3 class="mg-md">
+					Description
+				</h3>
+				<div class="divider-h">
+					<span class="divider"></span>
+				</div>
+				<volist name="describe_list" id="vo">
+				<p>
+					{$vo['content']}
+				</p>
+				</volist>
+			</div>
+			<div class="col-sm-6">
+				<img src="__IMG__/member.jpg" class="img-responsive" alt='' />
+			</div>
+		</div>
+	</div>
+</div>
+<!-- bloc-1 END -->
+
+<!-- Bloc Group -->
+<div class='bloc-group'>
+
+<!-- bloc-2 -->
+<div class="bloc l-bloc  bloc-tile-2" id="bloc-2">
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-12">
+				<h2 class="mg-md text-left ">
+					News and Events
+				</h2>
+				<div class="divider-h">
+					<span class="divider"></span>
+				</div>
+				<ol id="list1">
+				<foreach name="news_list" item="vo">
+				<!--<p>-->
+					<li>
+						{$vo.content}
+					</li>
+				</foreach>
+				</ol>
+				<!--</p>-->
+			</div>
+		</div>
+	</div>
+</div>
+<!-- bloc-2 END -->
+
+<!-- bloc-3 -->
+<div class="bloc l-bloc  bloc-tile-2" id="bloc-3">
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-12">
+				<h3 class="mg-md">
+					Contact Us
+				</h3>
+				<blockquote>
+					<p>
+						Add: No. 238 Songling Road, Qingdao, China
+					</p>
+				</blockquote>
+				<blockquote>
+					<p>
+						Postal code: 266100
+					</p>
+				</blockquote>
+				<blockquote>
+					<p>
+						Email: zhenghaiyong@gmail.com
+					</p>
+				</blockquote>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- bloc-3 END -->
+</div>
+<!-- Bloc Group END -->
+
+<!-- ScrollToTop Button -->
+<a class="bloc-button btn btn-d scrollToTop" onclick="scrollToTarget('1')"><icon class="fa fa-chevron-up"></icon></a>
+<!-- ScrollToTop Button END-->
+
+</block>
+
+
+
+
+

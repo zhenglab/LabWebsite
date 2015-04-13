@@ -1,0 +1,40 @@
+<extend name="Public/base" /> 
+<block name="body">
+	<h2>修改学生信息</h2>
+		<br></br>
+		
+	   	<!-- 实例化百度编辑器 -->
+	   	<volist name="student_list" id="vo">
+	   	<form action="__URL__/do_edit_student/id/{$vo['id']}" enctype="multipart/form-data" method="post">
+	   		<p class="subtit">学生姓名</p>
+			<div>
+				<input type="text" id="txtTitle" name="name" style="width:560px; height:20px; float:left;" maxlength="100" value="{$vo['name']}"/>
+			</div>
+			<br></br>
+			<br></br>
+			<p class="subtit">个人主页</p>
+			<div>
+				<input type="text" id="txtTitle" name="homepage" style="width:560px; height:20px; float:left;" maxlength="100" value="{$vo['homepage']}" />
+			</div>
+			<br></br>
+			<br></br>
+			<p class="subtit">学生介绍</p>
+		    <div id="myEditor">
+		    	<script id="container" name="content" type="text/plain">
+		    		{$vo['describe']}
+    			</script>
+    			<script type="text/javascript">
+        			var ue = UE.getEditor('container');
+    			</script>
+			</div>
+			<br></br>
+			<p class="subtit">修改头像</p>
+			<input type="file" name="photo" />
+			<br></br>
+			<br></br>
+			<input type="submit" value="{$btn_ok_text}"/>
+		</form>
+		</volist>
+	    <div class="clear"></div>
+
+</block>

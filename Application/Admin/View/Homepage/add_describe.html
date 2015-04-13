@@ -1,0 +1,22 @@
+<extend name="Public/base" /> 
+<block name="body">
+	<h2>添加简介</h2>
+		<br></br>
+		
+	   	<!-- 实例化百度编辑器 -->
+
+	   	<form action="__URL__/do_add_describe"  method="post">
+			<p class="subtit">简介内容</p>
+		    <div id="myEditor">
+		    	<script id="container" name="content" type="text/plain">
+    			</script>
+    			<script type="text/javascript">
+        			var ue = UE.getEditor('container');
+    			</script>
+			</div>
+			<br></br>
+			<input type="submit" value="{$btn_ok_text}"/>
+		</form>
+	    <div class="clear"></div>
+
+</block>

@@ -1,0 +1,58 @@
+<extend name="Public/base" /> 
+<block name="body">
+	<h2>修改论文信息</h2>
+		<br></br>
+		
+	   	<!-- 实例化百度编辑器 -->
+	   	<volist name="paper_list" id="vo">
+	   	<form action="__URL__/do_edit_paper/id/{$vo['id']}" enctype="multipart/form-data" method="post">
+	   		<p class="subtit">论文题目</p>
+			<div>
+				<input type="text" id="txtTitle" name="title" style="width:560px; height:20px; float:left;" maxlength="100" value="{$vo['title']}"/>
+			</div>
+			<br></br>
+			<br></br>
+			<p class="subtit">论文分类</p>
+			<div>
+				<input type="text" id="txtTitle" name="classify" style="width:560px; height:20px; float:left;" maxlength="100" value="{$vo['classify']}" />
+			</div>
+			<br></br>
+			<br></br>
+			<p class="subtit">发表时间</p>
+			<div>
+				<input type="text" id="txtTitle" name="date" style="width:560px; height:20px; float:left;" maxlength="100" value="{$vo['date']}"/>
+			</div>
+			<br></br>
+			<br></br>
+			<p class="subtit">论文状态</p>
+			<div>
+				<select name="status" id="selType">
+					<option value="1">显示</option>
+					<option value="0">隐藏</option>
+				</select>
+			</div>
+			<br></br>
+			<p class="subtit">论文介绍</p>
+		    <div id="myEditor">
+		    	<script id="container" name="describe" type="text/plain">
+		    		{$vo['describe']}
+    			</script>
+    			<script type="text/javascript">
+        			var ue = UE.getEditor('container');
+    			</script>
+			</div>
+			<br></br>
+			<p class="subtit">上传论文文件</p>
+			<input type="file" name="paper" />
+			<br></br>
+			<br></br>
+			<p class="subtit">上传论文图片</p>
+			<input type="file" name="photo" />
+			<br></br>
+			<br></br>
+			<input type="submit" value="{$btn_ok_text}"/>
+		</form>
+		</volist>
+	    <div class="clear"></div>
+
+</block>

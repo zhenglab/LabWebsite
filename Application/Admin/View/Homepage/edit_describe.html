@@ -1,0 +1,26 @@
+<extend name="Public/base" /> 
+<block name="body">
+	<h2>添加简介</h2>
+		<br></br>
+		
+	   	<!-- 实例化百度编辑器 -->
+	   	<volist name="describe_list" id="vo">
+	   	<form action="__URL__/do_edit_describe/id/{$vo['id']}"  method="post">
+			<p class="subtit">简介内容</p>
+		    <div id="myEditor">
+		    	
+		    	<script id="container" name="content" type="text/plain">
+		    	{$vo['content']}
+    			</script>
+    			<script type="text/javascript">
+        			var ue = UE.getEditor('container');
+    			</script>
+    			
+			</div>
+			<br></br>
+			<input type="submit" value="{$btn_ok_text}"/>
+		</form>
+		</volist>
+	    <div class="clear"></div>
+
+</block>

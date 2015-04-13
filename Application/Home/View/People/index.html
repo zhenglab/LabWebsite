@@ -1,0 +1,87 @@
+<extend name="Base/common"/>
+<block name="body"> 
+<!-- bloc-5 -->
+<div class="bloc l-bloc " id="bloc-5">
+	<div class="container bloc-lg">
+		<div class="row">
+			<div class="col-sm-12">
+				<h2 class="mg-sm">
+					Faculty and Staff
+				</h2>
+				<div class="divider-h">
+					<span class="divider"></span>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- bloc-5 END -->
+
+<!-- bloc-6 -->
+<div class="bloc l-bloc " id="bloc-6">
+	<foreach name="teacher_list" item="vo" >
+	<div class="container bloc-lg">
+		<div class="row">
+			<div class="col-sm-6">
+				<img src="__PUBLIC__/Uploads/{$vo.img_path}" class="img-responsive" alt='' />
+			</div>
+			<div class="col-sm-6">
+				<h2 class="mg-lg">
+					<a href="{$vo.homepage}" target="_blank">
+					{$vo.name}
+					</a>
+				</h2>
+				<p class="mg-lg">
+					{$vo.describe}
+				</p>
+			</div>
+		</div>
+	</div>
+	</foreach>
+</div>
+<!-- bloc-6 END -->
+
+<!-- bloc-7 -->
+<div class="bloc l-bloc " id="bloc-7">
+	<div class="container bloc-lg">
+		<div class="row">
+			<div class="col-sm-12">
+				<h2 class="mg-sm">
+					Students
+				</h2>
+				<div class="divider-h">
+					<span class="divider"></span>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- bloc-7 END -->
+
+<!-- bloc-8 -->
+<div class="bloc l-bloc " id="bloc-8">
+	<foreach name="student_list" item="vo" >
+	<div class="container bloc-lg">
+		<div class="row">
+			<div class="col-sm-6">
+				<h2 class="mg-lg">
+					<a href="{$vo.homepage}" target="_balnk">
+					{$vo.name}
+					</a>
+				</h2>
+				<p class="mg-lg">
+					{$vo.describe}
+				</p>
+			</div>
+			<div class="col-sm-6">
+				<img src="__PUBLIC__/Uploads/{$vo.img_path}" class="img-responsive" alt='' width="300px" height="300px" />
+			</div>
+		</div>
+	</div>
+	</foreach>
+</div>
+<!-- bloc-8 END -->
+<!-- ScrollToTop Button -->
+<a class="bloc-button btn btn-d scrollToTop" onclick="scrollToTarget('1')"><icon class="fa fa-chevron-up"></icon></a>
+<!-- ScrollToTop Button END-->
+</block>
