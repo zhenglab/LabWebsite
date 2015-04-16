@@ -19,7 +19,8 @@ class IndexController extends CommonController {
 		
 		else
 		{
-			$this->error('您好，请先登录！！！',U('/Login/index/'));
+			//$this->error('您好，请先登录！！！',U('/Login/index/'));
+			$this->redirect('/Login/index');
 		}	
     }
 }    

@@ -26,14 +26,15 @@ class HomepageController extends CommonController {
 		$page->setConfig('theme',' %first% %upPage%  %linkPage%  %downPage% %end%');
         //设置分页回调方法
 		$show=$page->show();
-	
+		//查询，当前和历史
 		$describe_list=$describe->field(array('id','author','add_time','content','edit_time','status'))->where('status=1')->order('id desc')->limit($page->firstRow.','.$page->listRows)->select();
-			
+		$describe_list_old=$describe->field(array('id','author','add_time','content','edit_time','status'))->where('status=0')->order('id desc')->limit($page->firstRow.','.$page->listRows)->select();
 		//对原始信息过滤
 		//$this->filter($news_list);
 		$this->assign('describe_count',$count);
 		$this->assign('title','后台管理系统');
 		$this->assign('describe_list',$describe_list);
+		$this->assign('describe_list_old',$describe_list_old);
 		$this->assign('page_method',$show);
 		
 
@@ -110,6 +111,17 @@ class HomepageController extends CommonController {
 		 	$this->success('简介修改成功，返回上级页面',U('Homepage/describe'));
 		}else{
 		 	$this->error('简介修改失败，返回上级页面');
+		}
+	}
+	public function delete_describe(){
+		$this->login_verify();
+		$this->current_page_item = 1;
+		$this->current_list_item = 1;
+		$teacher=M('describe');
+		if($teacher->delete($_GET['id'])){
+			$this->success('简介信息删除成功');
+		}else{
+			$this->error($student->getLastSql());
 		}
 	}
 
