@@ -28,13 +28,13 @@ class HomepageController extends CommonController {
 		$show=$page->show();
 		//查询，当前和历史
 		$describe_list=$describe->field(array('id','author','add_time','content','edit_time','status'))->where('status=1')->order('id desc')->limit($page->firstRow.','.$page->listRows)->select();
-		$describe_list_old=$describe->field(array('id','author','add_time','content','edit_time','status'))->where('status=0')->order('id desc')->limit($page->firstRow.','.$page->listRows)->select();
+		$describe_list_hide=$describe->field(array('id','author','add_time','content','edit_time','status'))->where('status=0')->order('id desc')->limit($page->firstRow.','.$page->listRows)->select();
 		//对原始信息过滤
 		//$this->filter($news_list);
 		$this->assign('describe_count',$count);
 		$this->assign('title','后台管理系统');
 		$this->assign('describe_list',$describe_list);
-		$this->assign('describe_list_old',$describe_list_old);
+		$this->assign('describe_list_hide',$describe_list_hide);
 		$this->assign('page_method',$show);
 		
 
@@ -144,11 +144,13 @@ class HomepageController extends CommonController {
 		$show=$page->show();
 	
 		$news_list=$news->field(array('id','title','author','add_time','content','edit_time','status'))->where('status=1')->order('id desc')->limit($page->firstRow.','.$page->listRows)->select();
-			
+		$news_list_hide=$news->field(array('id','title','author','add_time','content','edit_time','status'))->where('status=0')->order('id desc')->limit($page->firstRow.','.$page->listRows)->select();
+
 		//对原始信息过滤
 		//$this->filter($news_list);
 		$this->assign('describe_count',$count);
 		$this->assign('news_list',$news_list);
+		$this->assign('news_list_hide',$news_list_hide);
 		$this->assign('page_method',$show);
 		$this->display();
 	}

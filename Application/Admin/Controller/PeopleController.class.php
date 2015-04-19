@@ -1,5 +1,5 @@
 <?php 
-namespace Admin\Controller;
+namespace Admin\Controller; 
 use Think\Controller;
 
 class PeopleController extends CommonController {
@@ -12,7 +12,7 @@ class PeopleController extends CommonController {
 		$this->login_verify();
 		$this->current_page_item = 2;
 		$this->current_list_item = 1;
-		$teacher=M('people');
+		$teacher=M('teacher');
 		$count=$teacher->count();
 		//分页显示文章列表，每页8篇文章
 		$page=new \Think\Page($count,8);//后台管理页面默认一页显示8条文章记录
@@ -25,12 +25,14 @@ class PeopleController extends CommonController {
         //设置分页回调方法
 		$show=$page->show();
 	
-		$teacher_list=$teacher->field(array('id','name','homepage','add_time','img_path','describe','status'))->where('status=1')->order('id desc')->limit($page->firstRow.','.$page->listRows)->select();
-			
+		$teacher_list=$teacher->field(array('id','name','homepage','add_time','img_path','t_describe','t_order','status'))->where('status=1')->order('id desc')->limit($page->firstRow.','.$page->listRows)->select();
+		$teacher_list_hide=$teacher->field(array('id','name','homepage','add_time','img_path','t_describe','t_order','status'))->where('status=0')->order('id desc')->limit($page->firstRow.','.$page->listRows)->select();
+
 		//对原始信息过滤
 		//$this->filter($news_list);
 		$this->assign('describe_count',$count);
 		$this->assign('teacher_list',$teacher_list);
+		$this->assign('teacher_list_hide',$teacher_list_hide);
 		$this->assign('page_method',$show);	
 		$this-> display();
 	}
@@ -56,19 +58,20 @@ class PeopleController extends CommonController {
 		}else{
 			//$filename=$_FILES['paper']['name'];
 			//$filename=substr($filename,0,strrpos(filename, '.'));
-			$this->upload_image();
+			$this->upload_image_teacher();
 		}
 
 
 		//结束
-		$teacher=M('people');
+		$teacher=M('teacher');
 		if($teacher->create()){
-			$teacher->name	=$_POST['name'];
-			$teacher->homepage	=$_POST['homepage'];
-			$teacher->describe	=$_POST['describe'];
-			$teacher->add_time	=date('Y-m-d H:i:s');
-			$teacher->img_path	=session('PeopleImgPath');  
-			$teacher->status 	='1';
+			$teacher->name			=$_POST['name'];
+			$teacher->homepage		=$_POST['homepage'];
+			$teacher->t_order		=$_POST['order'];
+			$teacher->t_describe	=$_POST['content'];
+			$teacher->add_time		=date('Y-m-d H:i:s');
+			$teacher->img_path		=session('PeopleImgPath');  
+			$teacher->status 		=$_POST['status'];
 					
 			//将文章写入数据库
 			if($teacher->add()){
@@ -89,7 +92,7 @@ class PeopleController extends CommonController {
 		header("Content-Type:text/html; charset=utf-8");
 		if($_GET['id']){
 			$teacher_id=$_GET['id'];
-			$teacher=M('people');
+			$teacher=M('teacher');
 			$teacher_list=$teacher->where('id='.$teacher_id)->select();
 			//$this->assign('title','后台管理系统');
 			$this->assign('teacher_list',$teacher_list);
@@ -104,25 +107,29 @@ class PeopleController extends CommonController {
 		$this->current_list_item = 1;
 		header("Content-Type:text/html; charset=utf-8");
 		if ($_FILES) {
-			$this->upload_image();
-			$teacher=M('people');
+			$this->upload_image_teacher();
+			$teacher=M('teacher');
 			$teacher_id=$_GET['id'];
 			$data = array(
-				'name'		=>$_POST['name'],
-				'homepage'	=>$_POST['homepage'],
-				'describe'	=>$_POST['content'],
-				'img_path'	=>session('PeopleImgPath'),
+				'name'			=>$_POST['name'],
+				'homepage'		=>$_POST['homepage'],
+				't_order'		=>$_POST['order'],
+				't_describe'	=>$_POST['content'],
+				'img_path'		=>session('PeopleImgPath'),
+				'status'		=>$_POST['status'],
 			);
 			$teacher_status=$teacher-> where('id='.$teacher_id)->setField($data);
 		}else{
 			//$filename=$_FILES['paper']['name'];
 			//$filename=substr($filename,0,strrpos(filename, '.'));
-			$teacher=M('people');
+			$teacher=M('teacher');
 			$teacher_id=$_GET['id'];
 			$data = array(
 				'name'		=>$_POST['name'],
 				'homepage'	=>$_POST['homepage'],
-				'describe'	=>$_POST['content'],
+				't_order'	=>$_POST['order'],
+				't_describe'	=>$_POST['content'],
+				'status'		=>$_POST['status'],
 				);
 			$teacher_status=$teacher-> where('id='.$teacher_id)->setField($data);
 		}
@@ -145,7 +152,7 @@ class PeopleController extends CommonController {
 		$this->login_verify();
 		$this->current_page_item = 2;
 		$this->current_list_item = 1;
-		$teacher=M('people');
+		$teacher=M('teacher');
 		if($teacher->delete($_GET['id'])){
 			$this->success('教师信息删除成功');
 		}else{
@@ -159,7 +166,7 @@ class PeopleController extends CommonController {
 		$this->login_verify();
 		$this->current_page_item = 2;
 		$this->current_list_item = 2;
-		$student=M('people');
+		$student=M('student');
 		$count=$student->count();
 		//分页显示文章列表，每页8篇文章
 		$page=new \Think\Page($count,8);//后台管理页面默认一页显示8条文章记录
@@ -172,12 +179,14 @@ class PeopleController extends CommonController {
         //设置分页回调方法
 		$show=$page->show();
 	
-		$student_list=$student->field(array('id','name','homepage','add_time','img_path','describe','status'))->where('status=2')->order('id desc')->limit($page->firstRow.','.$page->listRows)->select();
-			
+		$student_list=$student->field(array('id','name','homepage','add_time','img_path','t_describe','t_order','status'))->where('status=1')->order('id desc')->limit($page->firstRow.','.$page->listRows)->select();
+		$student_list_hide=$student->field(array('id','name','homepage','add_time','img_path','t_describe','t_order','status'))->where('status=0')->order('id desc')->limit($page->firstRow.','.$page->listRows)->select();
+
 		//对原始信息过滤
 		//$this->filter($news_list);
 		$this->assign('describe_count',$count);
 		$this->assign('student_list',$student_list);
+		$this->assign('student_list_hide',$student_list_hide);
 		$this->assign('page_method',$show);	
 		$this-> display();
 	}
@@ -197,16 +206,17 @@ class PeopleController extends CommonController {
 		}else{
 			//$filename=$_FILES['paper']['name'];
 			//$filename=substr($filename,0,strrpos(filename, '.'));
-			$this->upload_image();
+			$this->upload_image_student();
 		}
-		$student=M('people');
+		$student=M('student');
 		if($student->create()){
-			$student->name	=$_POST['name'];
-			$student->homepage	=$_POST['homepage'];
-			$student->describe	=$_POST['describe'];
-			$student->add_time	=date('Y-m-d H:i:s');
-			$student->img_path	=session('PeopleImgPath');;  
-			$student->status 	='2';
+			$student->name			=$_POST['name'];
+			$student->homepage		=$_POST['homepage'];
+			$student->t_order		=$_POST['order'];
+			$student->t_describe	=$_POST['content'];
+			$student->add_time		=date('Y-m-d H:i:s');
+			$student->img_path		=session('PeopleImgPath');;  
+			$student->status 		=$_POST['status'];;
 					
 			//将文章写入数据库
 			if($student->add()){
@@ -227,7 +237,7 @@ class PeopleController extends CommonController {
 		header("Content-Type:text/html; charset=utf-8");
 		if($_GET['id']){
 			$student_id=$_GET['id'];
-			$student=M('people');
+			$student=M('student');
 			$student_list=$student->where('id='.$student_id)->select();
 			//$this->assign('title','后台管理系统');
 			$this->assign('student_list',$student_list);
@@ -243,23 +253,27 @@ class PeopleController extends CommonController {
 		header("Content-Type:text/html; charset=utf-8");
 
 		if ($_FILES) {
-			$this->upload_image();
-			$student=M('people');
+			$this->upload_image_student();
+			$student=M('student');
 			$student_id=$_GET['id'];
 			$data = array(
-				'name'		=>$_POST['name'],
-				'homepage'	=>$_POST['homepage'],
-				'describe'	=>$_POST['content'],
-				'img_path'	=>session('PeopleImgPath'),
+				'name'			=>$_POST['name'],
+				'homepage'		=>$_POST['homepage'],
+				't_describe'	=>$_POST['content'],
+				'img_path'		=>session('PeopleImgPath'),
+				't_order'		=>$_POST['order'],
+				'status'		=>$_POST['status'],
 				);
 			$student_status=$student-> where('id='.$student_id)->setField($data);
 		}else{
-			$student=M('people');
+			$student=M('student');
 			$student_id=$_GET['id'];
 			$data = array(
 				'name'		=>$_POST['name'],
 				'homepage'	=>$_POST['homepage'],
-				'describe'	=>$_POST['content']
+				't_describe'	=>$_POST['content'],
+				't_order'		=>$_POST['order'],
+				'status'		=>$_POST['status'],
 				);
 			$student_status=$student-> where('id='.$student_id)->setField($data);
 		}
@@ -282,7 +296,7 @@ class PeopleController extends CommonController {
 		$this->login_verify();
 		$this->current_page_item = 2;
 		$this->current_list_item = 2;
-		$student=M('people');
+		$student=M('student');
 		if($student->delete($_GET['id'])){
 			$this->success('学生信息删除成功');
 		}else{
@@ -295,7 +309,7 @@ class PeopleController extends CommonController {
 		$this->current_list_item = 3;
 		$this->display(); 
 	}
-	public function upload_image(){
+	public function upload_image_teacher(){
 	    $upload = new \Think\Upload();// 实例化上传类
 	    $upload->maxSize   =     3145728 ;// 设置附件上传大小
 	    $upload->exts      =     array('jpg', 'gif', 'png', 'jpeg');// 设置附件上传类型
@@ -303,7 +317,27 @@ class PeopleController extends CommonController {
 	    $upload->autoSub   =	 false;
 	    //$upload->saveName  =	 $filename;
 	    $upload->rootPath  =     './Public/Uploads/';  // 设置附件上传根目录
-	    $upload->savePath  =     'People/'; // 设置附件上传（子）目录
+	    $upload->savePath  =     'People/teacher/'; // 设置附件上传（子）目录
+	    // 上传文件 
+	    $info   =   $upload->upload();
+	    if(!$info) {// 上传错误提示错误信息
+	        $this->error($upload->getError());
+	    }else{// 上传成功
+	        //$this->success('上传成功！');
+	        foreach($info as $file){
+        		session('PeopleImgPath',$file['savepath'].$file['savename']);
+    		}
+	    }
+	}
+	public function upload_image_student(){
+	    $upload = new \Think\Upload();// 实例化上传类
+	    $upload->maxSize   =     3145728 ;// 设置附件上传大小
+	    $upload->exts      =     array('jpg', 'gif', 'png', 'jpeg');// 设置附件上传类型
+	    $upload->replace   =	 true;
+	    $upload->autoSub   =	 false;
+	    //$upload->saveName  =	 $filename;
+	    $upload->rootPath  =     './Public/Uploads/';  // 设置附件上传根目录
+	    $upload->savePath  =     'People/student/'; // 设置附件上传（子）目录
 	    // 上传文件 
 	    $info   =   $upload->upload();
 	    if(!$info) {// 上传错误提示错误信息

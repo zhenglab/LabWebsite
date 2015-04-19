@@ -23,13 +23,11 @@
       <!-- Start Content Box -->
       <div class="content-box-header">
         <h3>新闻列表</h3>
-        <!--
         <ul class="content-box-tabs">
-          <li><a href="#tab1" class="default-tab">文章列表(共{$news_count}篇)</a></li>
-          <!-- href must be unique and match the id of target div --
-          <li><a href="#tab2">登录记录</a></li>
+          <li><a href="#tab1" class="default-tab">当前新闻</a></li>
+          <!-- href must be unique and match the id of target div -->
+          <li><a href="#tab2">隐藏新闻</a></li>
         </ul>
-        -->
         <div class="clear"></div>
       </div>
       
@@ -69,6 +67,41 @@
           </table>
         </div>
         <!-- End #tab1 -->
+        <div class="tab-content" id="tab2">          
+          <!-- 表头 -->
+          <table>
+            <thead>
+              <tr>
+                <th>
+                </th>
+                <th>标题</th>
+                <th>添加者</th>
+                <th>添加时间</th>
+                <th>最后修改</th>  
+                <th>选项</th>
+              </tr>
+            </thead>
+              
+            <!-- 表内容部分 -->
+            <tbody>
+              <volist name="news_list_hide" id="vo_hide">
+              <tr>
+                <td></td>
+                <td>{$vo_hide['title']} </td>
+                <td>{$vo_hide['author']} </td>
+                <td>{$vo_hide['add_time']}</td>
+                <td>{$vo_hide['edit_time']} </td>
+                <td>
+                  <!-- Icons -->
+                  <a href="__URL__/edit_news/id/{$vo['id']}" title="编辑"><img src="__IMG__/icons/pencil.png" alt="编辑" /></a>
+                  <a href="__URL__/delete_news/id/{$vo['id']}" title="删除"><img src="__IMG__/icons/cross.png" alt="删除" /></a> 
+                </td>
+              </tr>  
+              </volist>                        
+            </tbody>
+          </table>
+        </div>
+        <!-- End #tab2 -->
       </div>
       <!-- End .content-box-content -->
     </div>

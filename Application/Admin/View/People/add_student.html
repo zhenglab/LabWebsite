@@ -1,4 +1,4 @@
-<extend name="Public/base" />
+<extend name="Public/base" /> 
 
 <block name="body"> 
 	<h2>添加学生</h2>
@@ -16,6 +16,20 @@
 			<p class="subtit">个人主页</p>
 			<div>
 				<input type="text" id="txtTitle" name="homepage" style="width:560px; height:20px; float:left;" maxlength="100" value="请添加学生的个人主页" onfocus="if(value=='请添加学生的个人主页') {value=''}" onblur="if (value=='') {value='请添加学生的个人主页'}"/>
+			</div>
+			<br></br>
+			<br></br>
+			<p class="subtit">学生状态</p>
+			<div>
+				<select name="status" id="selType">
+					<option value="1">显示</option>
+					<option value="0">隐藏</option>
+				</select>
+			</div>
+			<br></br>
+			<p class="subtit">排序</p>
+			<div>
+				<input type="text" id="txtTitle" name="order" style="width:50px; height:20px; float:left;" maxlength="100" value="学生排序" onfocus="if(value=='学生排序') {value=''}" onblur="if (value=='') {value='学生排序'}"/>
 			</div>
 			<br></br>
 			<br></br>

@@ -26,11 +26,13 @@ class ResearchController extends CommonController {
 		$show=$page->show();
 	
 		$paper_list=$paper->field(array('id','title','classify','date','describe','file_path','img_path','add_time','status'))->where('status=1')->order('id desc')->limit($page->firstRow.','.$page->listRows)->select();
-			
+		$paper_list_hide=$paper->field(array('id','title','classify','date','describe','file_path','img_path','add_time','status'))->where('status=0')->order('id desc')->limit($page->firstRow.','.$page->listRows)->select();
+
 		//对原始信息过滤
 		//$this->filter($news_list);
 		$this->assign('paper_count',$count);
 		$this->assign('paper_list',$paper_list);
+		$this->assign('paper_list_hide',$paper_list_hide);
 		$this->assign('page_method',$show);	
 		$this-> display();
 	}
@@ -166,7 +168,7 @@ class ResearchController extends CommonController {
 	}
 	public function upload_paper(){
 	    $upload = new \Think\Upload();// 实例化上传类
-	    $upload->maxSize   =     3145728 ;// 设置附件上传大小
+	    $upload->maxSize   =     83886080 ;// 设置附件上传大小 10M
 	    $upload->exts      =     array('pdf');// 设置附件上传类型
 	    $upload->replace   =	 true;
 	    $upload->autoSub   =	 false;
@@ -186,7 +188,7 @@ class ResearchController extends CommonController {
 	}
 	public function upload_image(){
 	    $upload = new \Think\Upload();// 实例化上传类
-	    $upload->maxSize   =     3145728 ;// 设置附件上传大小
+	    $upload->maxSize   =     8388608 ;// 设置附件上传大小 1M
 	    $upload->exts      =     array('jpg', 'gif', 'png', 'jpeg');// 设置附件上传类型
 	    $upload->replace   =	 true;
 	    $upload->autoSub   =	 false;

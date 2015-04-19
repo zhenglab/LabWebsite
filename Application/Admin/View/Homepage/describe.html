@@ -1,4 +1,4 @@
-<extend name="Public/base" /> 
+<extend name="Public/base" />  
 <block name="body">
 	<!-- Page Head -->
     <h2>后台管理系统</h2>
@@ -65,6 +65,7 @@
           </table>
         </div>
         <!-- End #tab1 -->
+        
         <div class="tab-content" id="tab2">
           <!--历史简介-->
           <!-- 表头 -->
@@ -82,16 +83,16 @@
               
             <!-- 表内容部分 -->
             <tbody>
-              <volist name="describe_list_old" id="vo_old">
+              <volist name="describe_list_hide" id="vo_hide">
               <tr>
                 <td></td>
-                <td>{$vo_old['author']} </td>
-                <td>{$vo_old['add_time']}</td>
-                <td>{$vo_old['edit_time']} </td>
+                <td>{$vo_hide['author']} </td>
+                <td>{$vo_hide['add_time']}</td>
+                <td>{$vo_hide['edit_time']} </td>
                 <td>
                   <!-- Icons -->
-                  <a href="__URL__/edit_describe/id/{$vo_old['id']}" title="编辑"><img src="__IMG__/icons/pencil.png" alt="编辑" /></a> 
-                  <a href="__URL__/delete_describe/id/{$vo_old['id']}" title="删除"><img src="__IMG__/icons/cross.png" alt="删除" /></a> 
+                  <a href="__URL__/edit_describe/id/{$vo_hide['id']}" title="编辑"><img src="__IMG__/icons/pencil.png" alt="编辑" /></a> 
+                  <a href="__URL__/delete_describe/id/{$vo_hide['id']}" title="删除"><img src="__IMG__/icons/cross.png" alt="删除" /></a> 
                 </td>
               </tr>  
               </volist>                        

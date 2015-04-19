@@ -1,4 +1,4 @@
-<extend name="Public/base" /> 
+<extend name="Public/base" />
 <block name="body"> 
 	<!-- Page Head -->
     <h2>后台管理系统</h2>
@@ -23,13 +23,13 @@
       <!-- Start Content Box -->
       <div class="content-box-header">
         <h3>用户列表</h3>
-        <!--
+        
         <ul class="content-box-tabs">
-          <li><a href="#tab1" class="default-tab">文章列表(共{$news_count}篇)</a></li>
-          <!-- href must be unique and match the id of target div --
-          <li><a href="#tab2">登录记录</a></li>
+          <li><a href="#tab1" class="default-tab">启用用户</a></li>
+          <!-- href must be unique and match the id of target div -->
+          <li><a href="#tab2">禁用用户</a></li>
         </ul>
-        -->
+        
         <div class="clear"></div>
       </div>
       
@@ -60,6 +60,39 @@
                   <!-- Icons -->
                   <a href="__URL__/edit_user/id/{$vo['id']}" title="编辑"><img src="__IMG__/icons/pencil.png" alt="编辑" /></a>
                   <a href="__URL__/delete_user/id/{$vo['id']}" title="删除"><img src="__IMG__/icons/cross.png" alt="删除" /></a> 
+                </td>
+              </tr>  
+              </volist>                        
+            </tbody>
+          </table>
+        </div>
+        <!-- End #tab1 -->
+        <div class="tab-content" id="tab2">          
+          <!-- 表头 -->
+          <table>
+            <thead>
+              <tr>
+                <th>
+                </th>
+                <th>用户名</th>
+                <th>添加时间</th>
+                <th>用户状态</th>  
+                <th>选项</th>
+              </tr>
+            </thead>
+              
+            <!-- 表内容部分 -->
+            <tbody>
+              <volist name="user_list_hide" id="vo_hide">
+              <tr>
+                <td></td>
+                <td>{$vo_hide['username']} </td>
+                <td>{$vo_hide['add_time']}</td>
+                <td>{$vo_hide['status']} </td>
+                <td>
+                  <!-- Icons -->
+                  <a href="__URL__/edit_user/id/{$vo_hide['id']}" title="编辑"><img src="__IMG__/icons/pencil.png" alt="编辑" /></a>
+                  <a href="__URL__/delete_user/id/{$vo_hide['id']}" title="删除"><img src="__IMG__/icons/cross.png" alt="删除" /></a> 
                 </td>
               </tr>  
               </volist>                        

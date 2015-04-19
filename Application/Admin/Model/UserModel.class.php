@@ -17,11 +17,11 @@ class UserModel extends Model{
 	//附加规则：比如使用正则表达式验证，callback函数验证等，默认使用正则验证
 	//验证时间：1.新增时验证 2.编辑时验证 3.全部清况下验证
 	protected $_validate=array(
-		array('username',		'require',		'用户名必须非空'		),
+		array('username',		'require',				'用户名必须非空'		),
 		array('username',		'callback_checklen',	'用户名过长或过短',	0,	'callback'),
-		array('password',		'require',		'密码必须非空'			),
-		array('repassword',	'require',		'请重复输入密码'		),
-		array('password',		'repassword','两次输入的密码不一致，请重新输入',		0,	'confirm'),
+		array('password',		'require',				'密码必须非空'			),
+		array('repassword',		'require',				'请重复输入密码'		),
+		array('password',		'repassword',			'两次输入的密码不一致，请重新输入',		0,	'confirm'),
 		
 	);
 	
@@ -38,8 +38,8 @@ class UserModel extends Model{
 	//填充字段 
 	protected $_auto=array(
 			array('password','md5',3,'function'),
-			array('add_time','time',1,'function'),
-			array('status','1'),
+			array('add_time','time',2,'function'),
+			//array('status','1'),
 			//array('ip','callback_returnip',1,'callback'),
 			//array('createtime','time',1,'function'),
 	);

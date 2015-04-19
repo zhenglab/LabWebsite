@@ -32,13 +32,15 @@ class OtherController extends CommonController {
         //设置分页回调方法
 		$show=$page->show();
 	
-		$user_list=$user->field(array('id','username','password','add_time','status'))->order('id desc')->limit($page->firstRow.','.$page->listRows)->select();
-			
+		$user_list=$user->field(array('id','username','password','add_time','status'))->where('status=1')->order('id desc')->limit($page->firstRow.','.$page->listRows)->select();
+		$user_list_hide=$user->field(array('id','username','password','add_time','status'))->where('status=0')->order('id desc')->limit($page->firstRow.','.$page->listRows)->select();
+
 		//对原始信息过滤
 		//$this->filter($user_list);
 		$this->assign('user_count',$count);
 		$this->assign('title','后台管理系统');
 		$this->assign('user_list',$user_list);
+		$this->assign('user_list_hide',$user_list_hide);
 		$this->assign('page_method',$show);
 		
 		$this->display();

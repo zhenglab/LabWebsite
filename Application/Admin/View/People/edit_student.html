@@ -1,4 +1,4 @@
-<extend name="Public/base" /> 
+<extend name="Public/base" />
 <block name="body">
 	<h2>修改学生信息</h2>
 		<br></br>
@@ -18,10 +18,24 @@
 			</div>
 			<br></br>
 			<br></br>
+			<p class="subtit">学生状态</p>
+			<div>
+				<select name="status" id="selType">
+					<option value="1">显示</option>
+					<option value="0">隐藏</option>
+				</select>
+			</div>
+			<br></br>
+			<p class="subtit">排序</p>
+			<div>
+				<input type="text" id="txtTitle" name="order" style="width:50px; height:20px; float:left;" maxlength="100" value="{$vo['t_order']}" />
+			</div>
+			<br></br>
+			<br></br>
 			<p class="subtit">学生介绍</p>
 		    <div id="myEditor">
 		    	<script id="container" name="content" type="text/plain">
-		    		{$vo['describe']}
+		    		{$vo['t_describe']}
     			</script>
     			<script type="text/javascript">
         			var ue = UE.getEditor('container');
